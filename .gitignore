@@ -1,0 +1,33 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Models (VERY IMPORTANT — huge files)
+*.gguf
+vosk-model*
+all-MiniLM-L6-v2/
+
+# Environment variables
+.env
+
+# OS junk
+.DS_Store# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Models (VERY IMPORTANT — huge files)
+*.gguf
+vosk-model*
+all-MiniLM-L6-v2/
+
+# Environment variables
+.env
+
+# OS junk
+.DS_Store

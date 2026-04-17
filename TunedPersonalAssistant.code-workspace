@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../Downloads/vosk-model-small-en-in-0.4"
+		}
+	],
+	"settings": {}
+}
