@@ -28,3 +28,4 @@ def ask_groq(prompt: str, model: str = "llama-3.3-70b-versatile") -> str:
     except Exception as e:
         print("Groq API error:", e)
         return run_local_llm(original_prompt)
+    

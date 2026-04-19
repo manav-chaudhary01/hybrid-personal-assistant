@@ -22,4 +22,3 @@ def search_web(query):
     query = clean_query(query)
     url = "https://www.google.com/search?q=" + query.replace(" ", "+")
     webbrowser.open(url)
-

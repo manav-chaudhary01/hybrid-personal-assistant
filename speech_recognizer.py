@@ -23,8 +23,7 @@ class SpeechRecognizer:
             "open", "spotify", "you", "youtube", "google", "chrome",
             "calculator", "notepad", "music", "mail", "photos", "exit"
         ]
-
-        self.stream = None
+        
 
     def correct_word(self, word):
         best = process.extractOne(word, self.keywords, score_cutoff=75)

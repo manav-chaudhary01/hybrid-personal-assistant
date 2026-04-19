@@ -9,3 +9,4 @@ def is_internet_available(timeout=3):
         return True
     except socket.error:
         return False
+    
