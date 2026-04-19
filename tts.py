@@ -1,34 +1,33 @@
-# tts.py
 import pyttsx3
-import threading
-import queue
 import time
 
-engine = pyttsx3.init()
+engine = pyttsx3.init('sapi5')
 engine.setProperty('rate', 180)
-time.sleep(1)
-engine.say("")
-engine.runAndWait()
+engine.setProperty('volume', 1.0)
 
-speech_queue = queue.Queue()
+# 🔥 GLOBAL CONTROL (set from main)
+recognizer_ref = None
 
-def speech_worker():
-    while True:
-        text = speech_queue.get()
-        if text is None:
-            break
-        engine.say(text)
-        engine.runAndWait()
-        print(text, flush=True)
-        speech_queue.task_done()
 
-threading.Thread(target=speech_worker, daemon=True).start()
+def set_recognizer(recognizer):
+    global recognizer_ref
+    recognizer_ref = recognizer
 
-def speak(text, t = 1.5):
-    if text:
-        speech_queue.put(text)
 
-    time.sleep(t)
+def speak(text, t=0):
+    if not text:
+        return
 
-def speak_async(text):
-    speak(text)
+    if recognizer_ref:
+        recognizer_ref.pause_listening()
+
+    print("Assistant:", text, flush=True)
+
+    engine.say(text)
+    engine.runAndWait()
+
+    if t > 0:
+        time.sleep(t)
+
+    if recognizer_ref:
+        recognizer_ref.resume_listening()

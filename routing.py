@@ -11,6 +11,8 @@ from tts import speak
 
 
 def routing(text, intent):
+    internet = is_internet_available()
+    
     if intent == "app_open":
         open_app(text)
 
@@ -33,19 +35,25 @@ def routing(text, intent):
 
 
     elif intent == "casual_conversation":
-        run_local_llm(text)
-        time.sleep(5)
+        if internet:
+            ask_groq(text)
+        else:
+            run_local_llm(text)
+        time.sleep(1)
         return
 
 
     elif intent == "information_query":
+        if internet:
             ask_groq(text)
-            time.sleep(1)
-            return
+        else:
+            run_local_llm(text)
+        time.sleep(1)
+        return
         
 
     elif intent == "web_search":
-        if is_internet_available():
+        if internet:
             search_web(text)
             time.sleep(1)
             return

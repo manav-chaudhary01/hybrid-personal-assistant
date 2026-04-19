@@ -24,6 +24,8 @@ class SpeechRecognizer:
             "calculator", "notepad", "music", "mail", "photos", "exit"
         ]
 
+        self.stream = None
+
     def correct_word(self, word):
         best = process.extractOne(word, self.keywords, score_cutoff=75)
         return best[0] if best else word

@@ -3,38 +3,33 @@ from llama_cpp import Llama
 import time
 from tts import speak
 
+print("Loading Local LLM...")
+
+llm = Llama(
+    model_path="models/qwen.gguf",
+    n_ctx=1024,
+    n_threads=8,
+    verbose=False
+)
+
+print("Local LLM Loaded!")
+
 def run_local_llm(
         prompt: str,
-        model_path: str = "qwen.gguf",
-        max_tokens: int = 200,
-        temperature: float = 0.7,
-        n_ctx: int = 2048,
-        n_threads: int = 4
+        max_tokens: int = 80,
+        temperature: float = 0.6
 ) -> str:
-    
+
     try:
-        print("Local LLM got your query")
+        print("Local LLM processing...")
 
         system_prompt = (
             "You are a concise assistant. "
             "Answer in 1-2 short sentences only. "
-            "Do not repeat the question, "
-            "do not explain extra details, "
-            "and do not add examples."
-            "If the question is not complete, then respond accordingly."
+            "No extra explanation."
         )
 
         final_prompt = f"{system_prompt}\nUser: {prompt}\nAssistant:"
-
-        os.environ["GGML_METAL_LOG_LEVEL"] = "1"
-        sys.stderr = open(os.devnull, "w")
-
-        llm = Llama(
-            model_path=model_path,
-            n_ctx=n_ctx,
-            n_threads=n_threads,
-            verbose=False
-        )
 
         response = llm(
             final_prompt,
@@ -44,19 +39,18 @@ def run_local_llm(
 
         text = response["choices"][0]["text"].strip()
 
+        # cleanup
         for w in ["User:", "Assistant:", "Answer:", "Question:"]:
             text = text.replace(w, "")
 
-        sentences = text.split(".")
-        text = ".".join(sentences[:2]).strip()
+        text = text.split(".")
+        text = ".".join(text[:2]).strip()
 
         if not text.endswith("."):
             text += "."
 
+        speak(text, len(text.split()) - 1)
 
-        txt = text.split()
-        len_txt = len(txt)-1
-        speak(text,len_txt)
         return text
 
     except Exception as e:

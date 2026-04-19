@@ -1,15 +1,13 @@
-# assistant_main.py
-
 from load_models import recognizer, detector
 from routing import routing
 from temperature import startup_temp_fetch
 import time
-from tts import speak
+from tts import speak, set_recognizer
+
+set_recognizer(recognizer)
 
 
 startup_temp_fetch() 
-
-
 speak("Hello! I am ready to assist you.",3)
 
 
