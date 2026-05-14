@@ -82,7 +82,15 @@ class SBERTIntentDetector:
                 "help me understand this",
                 "what is machine learning",
                 "what is artificial intelligence",
-                "explain any topic"
+                "explain any topic",
+                "what are data structures",
+                "explain data structures",
+                "what is programming",
+                "tell me about algorithms",
+                "how does computer work",
+                "what is a database",
+                "explain networking",
+                "what is cloud computing"
             ],
 
             "file_search_open": [
@@ -170,7 +178,7 @@ class SBERTIntentDetector:
             threshold = 0.30
 
         else:  # information_query, casual_conversation, file_search_open
-            threshold = 0.25
+            threshold = 0.22
 
 
         if best_score < threshold:

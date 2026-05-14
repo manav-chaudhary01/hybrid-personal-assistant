@@ -8,13 +8,11 @@ from rapidfuzz import process
 def open_app(query: str):
     query = query.lower()
 
-    # --- NORMALIZATION ---
     query = query.replace("vs code", "virtual studio code")
     query = query.replace("vscode", "virtual studio code")
     query = query.replace("intellij", "intellij idea ce")
     query = query.replace("code", "virtual studio code")
 
-    # --- SUPPORTED APPS ---
     apps = [
         "chrome",
         "virtual studio code",

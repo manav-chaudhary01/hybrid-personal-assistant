@@ -39,7 +39,7 @@ class SpeechRecognizer:
         if not self.listening:
             return ""
 
-        print("🎤 Listening...")
+        print("Speak now")
 
         text = ""
         silence_start = time.time()
@@ -84,7 +84,7 @@ class SpeechRecognizer:
 
         text = text.strip()
 
-        print(f"🎤 Final: {text if text else '[silence]'}")
+        print(f"Final: {text if text else '[silence]'}")
         return text
 
 
