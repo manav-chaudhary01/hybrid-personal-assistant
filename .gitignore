@@ -21,6 +21,7 @@ models/
 # OS files
 .DS_Store
 Thumbs.db
+.vscode/
 
 # Cache / temp
 *.log
